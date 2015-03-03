@@ -66,6 +66,7 @@ public class POSTagger {
  
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bwAbstract = new BufferedWriter(fw);
+			boolean hasWrittenLine=false;
 			
 			while((line=brAbstract.readLine())!=null){
 				
@@ -79,8 +80,12 @@ public class POSTagger {
 			    	//System.out.println("Token: " + tw.word() + "- Tag:" + tw.tag());
 			    	if(tw.tag().equalsIgnoreCase("NN")||tw.tag().equalsIgnoreCase("NNS")||tw.tag().equalsIgnoreCase("NNP")||tw.tag().equalsIgnoreCase("NNPS"))
 			    	bwAbstract.write(tw.word() + " ");
+			    	hasWrittenLine = true;
 			    }
-			    bwAbstract.write("\n");
+			    if(hasWrittenLine){
+			    	bwAbstract.write("\n");
+			    	hasWrittenLine=false;
+			    }
 			}
 			bwAbstract.close();
 			brAbstract.close();
